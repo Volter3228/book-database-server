@@ -9,6 +9,8 @@ class Shelf extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['number'];
+
     public function bookcase() {
         return $this->belongsTo(Bookcase::class);
     }
