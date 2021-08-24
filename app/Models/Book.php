@@ -9,12 +9,14 @@ class Book extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'place_id', 'place_type_id'];
+
     public function authors() {
-        return $this->belongsToMany(Author::class);
+        return $this->belongsToMany(Author::class)->withTimestamps();
     }
 
     public function topics() {
-        return $this->belongsToMany(Topic::class);
+        return $this->belongsToMany(Topic::class)->withTimestamps();
     }
 
     public function placeType() {
@@ -29,13 +31,13 @@ class Book extends Model
         return $this->hasOne(Box::class, 'id', 'place_id');
     }
 
-    public function scopeProfile($query)
+    public function scopePlace($query)
     {
         return $query
-            ->when($this->placeType->name === 'shelf', function ($q) {
-                return $q->with('shelf');
+            ->when($this->placeType(), function ($q) {
+                return $q->with('shelf')->first()->shelf;
             }, function ($q) {
-                return $q->with('box');
+                return $q->with('box')->first()->shelf;
             });
     }
 }
