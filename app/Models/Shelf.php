@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Shelf extends Model
 {
     use HasFactory;
+
+    public function bookcase() {
+        return $this->belongsTo(Bookcase::class);
+    }
 }
