@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatesBookcasesTable extends Migration
+class CreateBookcasesTable extends Migration
 {
     /**
      * Run the migrations.
