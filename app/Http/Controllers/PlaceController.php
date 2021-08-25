@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Bookcase;
 use App\Models\Box;
-use App\Models\Shelf;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class PlaceController extends Controller
 {
@@ -23,11 +20,11 @@ class PlaceController extends Controller
             })
             ->except(['shelves']);
 
-        Log::info($bookcases);
-
-        $boxes = Box::get()->map(function ($item) {
+        $boxes = Box::with('books')->get()
+            ->map(function ($item) {
             $item['type'] = 'box';
-            return $item;
+            $item['booksCount'] = collect($item['books'])->count();
+            return collect($item)->except('books');
         });
         return $boxes->toBase()->merge($bookcases)->sortByDesc('updated_at')->values();
     }
