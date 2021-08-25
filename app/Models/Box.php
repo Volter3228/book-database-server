@@ -12,6 +12,6 @@ class Box extends Model
     protected $fillable = ['info'];
 
     public function books() {
-        return $this->hasMany(Book::class);
+        return $this->hasMany(Book::class, 'place_id', 'id');
     }
 }
