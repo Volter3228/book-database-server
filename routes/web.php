@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/getPlaces', [PlaceController::class, 'index']);
-Route::get('/getBooks', [BookController::class, 'index']);
+Route::get('/places', [PlaceController::class, 'index']);
+Route::get('/books', [BookController::class, 'index']);
