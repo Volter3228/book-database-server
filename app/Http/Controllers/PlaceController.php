@@ -7,7 +7,7 @@ use App\Models\Box;
 
 class PlaceController extends Controller
 {
-    public function getPlaces()
+    public function index()
     {
         $bookcases = Bookcase::with('shelves.books')->get()
             ->map(function ($item) {
@@ -27,4 +27,6 @@ class PlaceController extends Controller
         });
         return $boxes->toBase()->merge($bookcases)->sortByDesc('updated_at')->values();
     }
+
+    
 }
