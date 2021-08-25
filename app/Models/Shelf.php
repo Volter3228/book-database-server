@@ -14,4 +14,8 @@ class Shelf extends Model
     public function bookcase() {
         return $this->belongsTo(Bookcase::class);
     }
+
+    public function books() {
+        return $this->hasMany(Book::class);
+    }
 }

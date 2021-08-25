@@ -10,4 +10,8 @@ class Box extends Model
     use HasFactory;
 
     protected $fillable = ['info'];
+
+    public function books() {
+        return $this->hasMany(Book::class);
+    }
 }
