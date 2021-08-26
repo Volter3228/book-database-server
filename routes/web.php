@@ -20,3 +20,6 @@ Route::get('/', function () {
 
 Route::get('/places', [PlaceController::class, 'index']);
 Route::get('/books', [BookController::class, 'index']);
+
+Route::post('/places', [PlaceController::class, 'store']);
+Route::post('/books', [BookController::class, 'store']);
