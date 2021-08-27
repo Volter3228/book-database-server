@@ -16,8 +16,13 @@ class BookController extends Controller
     {
         $books = Book::with(['authors', 'topics', 'placeType'])->get()->map(function ($item) {
             if ($item->placeType['name'] === 'shelf') {
+                $item['placeType'] = 'bookcase';
+                $item['place_id'] = $item->place()->bookcase_id;
                 $item['shelf_number'] = $item->place()->number;
+            } else {
+                $item['placeType'] = 'box';
             }
+
             return collect($item)->except(['place_type']);
         })->sortByDesc('created_at');
         return $books->values();
